@@ -12,6 +12,7 @@ defmodule EctoUpsertIssue.Application do
     children = [
       # Starts a worker by calling: EctoUpsertIssue.Worker.start_link(arg1, arg2, arg3)
       # worker(EctoUpsertIssue.Worker, [arg1, arg2, arg3]),
+      supervisor(EctoUpsertIssue.Repo, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

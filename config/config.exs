@@ -2,6 +2,17 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
+config :ecto_upsert_issue,
+      ecto_repos: [EctoUpsertIssue.Repo]
+
+config :ecto_upsert_issue, EctoUpsertIssue.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "ecto_upsert_issue_repo",
+  # username: "user",
+  # password: "pass",
+  hostname: "localhost"
+
+
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
