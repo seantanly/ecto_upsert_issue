@@ -19,4 +19,15 @@ defmodule EctoUpsertIssueTest do
     assert db_tag.id == tag.id
     assert tag2.id == tag.id
   end
+
+
+  test "upsert id should be nil when on_conflict: :nothing" do
+    Repo.delete_all(Tag)
+
+    name = "unique"
+    tag = Repo.insert!(%Tag{name: name}, on_conflict: :nothing)
+    tag2 = Repo.insert!(%Tag{name: name}, on_conflict: :nothing)
+
+    assert tag2.id == nil
+  end
 end
