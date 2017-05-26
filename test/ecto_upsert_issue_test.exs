@@ -5,11 +5,12 @@ defmodule EctoUpsertIssueTest do
   alias EctoUpsertIssue.Repo
   alias EctoUpsertIssue.Tag
 
-  test "upsert on conflict returns the same record" do
+  test "upsert on conflict returns the same struct.id" do
     Repo.delete_all(Tag)
 
-    tag = Tag.find_or_create!("interesting")
-    tag2 = Tag.find_or_create!("interesting")
+    name = "unique"
+    tag = Repo.insert!(%Tag{name: name}, on_conflict: [set: [name: name]], conflict_target: :name)
+    tag2 = Repo.insert!(%Tag{name: name}, on_conflict: [set: [name: name]], conflict_target: :name)
     db_tags = Repo.all(Tag)
 
     assert length(db_tags) == 1
